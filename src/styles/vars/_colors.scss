@@ -1,0 +1,26 @@
+// Adjust or add Colors:
+$states: (
+  info: #2F80ED,
+  success: #27AE60,
+  warning: #E2B93B,
+  error: #EB5757,
+) !default;
+
+$color-white: #FFFFFF;
+$color-black: #000000;
+$color-clear: transparent;
+$color-yellow: #F4CE47;
+$color-dark-gray: #2A2C2E;
+
+// Map to Bootstrap colors:
+$theme-colors: (
+  primary:   $color-yellow,
+  secondary: $color-white,
+  tertiary:  $color-dark-gray,
+  success:   map-get($states, success),
+  info:      map-get($states, info),
+  warning:   map-get($states, warning),
+  danger:    map-get($states, error),
+  light:     $color-white,
+  dark:      $color-black,
+);

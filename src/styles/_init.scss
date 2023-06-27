@@ -1,0 +1,33 @@
+// This partial overrides variables used by bootstrap and then imports all the bootstrap variables and mixins.
+// This partial can be imported by any component's .scss file in order to gain access to variables and mixins without introducing any duplicate styles.
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "bootstrap/scss/functions";
+
+// 2. Override Bootstrap variables as needed here.
+// To see what variables are available to override, go to node_modules/bootstrap/scss/_variables.scss
+// Mediacurrent theme.
+@import "vars/variables"; // MC Variables, BS Overrides
+@import "vars/helpers"; // Custom mixins, functions
+@import "vars/colors"; // MC color variables
+@import "vars/cards"; // MC button variables
+@import "vars/fonts";
+@import "vars/buttons"; // MC button variables
+@import "vars/inputs"; // MC button variables
+@import "vars/reset";
+
+// 3. Import the required bootstrap configuration.
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// 4. Include any additional bootstrap components here.
+// @import "react-loading-skeleton/dist/skeleton";
+// @import "react-lazy-load-image-component/src/effects/blur";
+
+// Uncomment to show outer edges of rows.
+// .row {
+//   box-shadow: 1px 0 0 0 cyan, -1px 0 0 0 cyan;
+// }

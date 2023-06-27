@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import './styles.scss'
 import { useSignUpMutation } from '@services/api'
+import classNames from 'classnames'
 
 interface ISignUpProps {
   children?: React.ReactNode
@@ -16,7 +16,8 @@ interface SignUpForm {
   lastName: string
   email: string
   password: string
-  // termsAndConditions: boolean
+  confirmPassword: string
+  termsAndConditions: boolean
 }
 
 const formSchema = Yup.object().shape({
@@ -29,11 +30,15 @@ const formSchema = Yup.object().shape({
     .email('Email is invalid'),
   password: Yup.string()
     .required('Password is required')
-    // .min(8, 'Password length should be at least 8 characters')
-    .max(12, 'Password cannot exceed more than 12 characters'),
+    .min(6, 'Password must be at least 6 characters'),
+  confirmPassword: Yup.string()
+    .required('Confirm Password is required')
+    .oneOf([Yup.ref('password')], 'Passwords must match'),
+  termsAndConditions: Yup.boolean()
+    .required("Terms and Conditions is required")
 })
 
-const SignUp:React.FC<ISignUpProps> = () => {
+const SignUp: React.FC<ISignUpProps> = () => {
   const [signUp] = useSignUpMutation()
   const navigate = useNavigate()
 
@@ -43,14 +48,21 @@ const SignUp:React.FC<ISignUpProps> = () => {
       lastName: '',
       email: '',
       password: '',
-      // termsAndConditions: false
+      confirmPassword: '',
+      termsAndConditions: false
     },
+    mode: 'all',
     resolver: yupResolver(formSchema)
   })
 
   const onSubmit = async (values: SignUpForm) => {
     try {
-      const response = await signUp(values)
+      const response = await signUp({
+        email: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        password: values.password
+      })
       if ('error' in response) {
         return alert('Something went wrong')
       }
@@ -61,34 +73,115 @@ const SignUp:React.FC<ISignUpProps> = () => {
   }
 
   return (
-    <form onSubmit={methods.handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        placeholder="First Name"
-        {...methods.register('firstName')}
-      />
-      <br />
-      <input
-        type="text"
-        placeholder="Last Name"
-        {...methods.register('lastName')}
-      />
-      <br />
-      <input
-        type="email"
-        placeholder="Email"
-        {...methods.register('email')}
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="Password"
-        {...methods.register('password')}
-      />
-      <br />
-      <button type="submit">Sign Up</button>
-      <br />
-      <Link to="/auth/sign-in">Already have account?</Link>
+    <form onSubmit={methods.handleSubmit(onSubmit)} className="panel panel-dark">
+      <div className="col-6 vstack gap-2">
+      <div className="d-flex justify-content-between align-items-center">
+          <h4>Sign Up</h4>
+          <Link to="/auth/sign-in" className="link">Alredy have an account? <b>Sign in</b></Link>
+        </div>
+
+        <div className="form-floating">
+          <input
+            id="firstName"
+            type="text"
+            placeholder="First Name"
+            className={classNames(
+              'form-control',
+              {
+                'is-invalid': methods.formState.errors.firstName,
+                'is-valid': !methods.formState.errors.firstName && methods.formState.dirtyFields.firstName,
+              }
+            )}
+            {...methods.register('firstName')}
+          />
+          <label htmlFor="firstName">FirstName</label>
+          <div className="invalid-feedback">
+            {methods.formState.errors.firstName?.message}
+          </div>
+        </div>
+
+        <div className="form-floating">
+          <input
+            id="lastName"
+            type="text"
+            placeholder="Last Name"
+            className={classNames(
+              'form-control',
+              {
+                'is-invalid': methods.formState.errors.lastName,
+                'is-valid': !methods.formState.errors.lastName && methods.formState.dirtyFields.lastName,
+              }
+            )}
+            {...methods.register('lastName')}
+          />
+          <label htmlFor="lastName">LastName</label>
+          <div className="invalid-feedback">
+            {methods.formState.errors.lastName?.message}
+          </div>
+        </div>
+
+        <div className="form-floating">
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            className={classNames(
+              'form-control',
+              {
+                'is-invalid': methods.formState.errors.email,
+                'is-valid': !methods.formState.errors.email && methods.formState.dirtyFields.email,
+              }
+            )}
+            {...methods.register('email')}
+          />
+          <label htmlFor="email">Email</label>
+          <div className="invalid-feedback">
+            {methods.formState.errors.email?.message}
+          </div>
+        </div>
+
+        <div className="form-floating">
+          <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            className={classNames(
+              'form-control',
+              {
+                'is-invalid': methods.formState.errors.password,
+                'is-valid': !methods.formState.errors.password && methods.formState.dirtyFields.password,
+              }
+            )}
+            {...methods.register('password')}
+          />
+          <label htmlFor="password">Password</label>
+          <div className="invalid-feedback">
+            {methods.formState.errors.password?.message}
+          </div>
+        </div>
+
+        <div className="form-floating">
+          <input
+            id="confirm-password"
+            type="password"
+            placeholder="Confirm Password"
+            className={classNames(
+              'form-control',
+              {
+                'is-invalid': methods.formState.errors.confirmPassword,
+                'is-valid': !methods.formState.errors.confirmPassword && methods.formState.dirtyFields.confirmPassword,
+              }
+            )}
+            {...methods.register('confirmPassword')}
+          />
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <div className="invalid-feedback">
+            {methods.formState.errors.confirmPassword?.message}
+          </div>
+        </div>
+
+        <button className="btn btn-primary" type="submit">Sign Up</button>
+      </div>
     </form>
   )
 }

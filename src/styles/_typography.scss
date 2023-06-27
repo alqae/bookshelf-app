@@ -1,0 +1,106 @@
+// Global typography styles.
+// See also ./vars/_typography.scss.
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Light.woff2') format('woff2'),
+      url('/fonts/ClashDisplay/ClashDisplay-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Bold.woff2') format('woff2'),
+      url('/fonts/ClashDisplay/ClashDisplay-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Extralight.woff2') format('woff2'),
+      url('/fonts/ClashDisplay/ClashDisplay-Extralight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Medium.woff2') format('woff2'),
+      url('/fonts/ClashDisplay/ClashDisplay-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Semibold.woff2') format('woff2'),
+      url('/fonts/ClashDisplay/ClashDisplay-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay/ClashDisplay-Regular.woff2') format('woff2'),
+      url('/fonts/ClashDisplay/ClashDisplay-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @include media-breakpoint-down(md) {
+    font-size: 0.875rem; // 14px
+    line-height: 1.8;
+  }
+}
+
+/// Default font sizing for headings
+h1 {
+  @include font(headings, xl, $color-white);
+}
+
+h2 {
+  @include font(headings, lg, $color-white);
+}
+
+h3 {
+  @include font(headings, md, $color-white);
+}
+
+h4 {
+  @include font(headings, sm, $color-white);
+}
+
+h5 {
+  @include font(headings, xs, map-get($theme-colors, primary));
+}
+
+.link {
+  @include font(body, md, rgba(255, 255, 255, 0.6));
+
+  b {
+    color: $color-white;
+    font-weight: 500;
+  }
+}
+
+p {
+  @include font(body, md, map-get($theme-colors, primary));
+
+  &:only-child {
+    margin-bottom: 0;
+  }
+}

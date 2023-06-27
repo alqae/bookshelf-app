@@ -1,0 +1,32 @@
+@import "@/styles/init";
+
+.appbar {
+  background-color: map-get($theme-colors, tertiary);
+  border-radius: 20px;
+  padding: 24px;
+  margin: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 96px;
+
+  img {
+    width: 166px;
+    height: 40px;
+  }
+
+  &__links {
+    a {
+      margin-right: 32px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+}

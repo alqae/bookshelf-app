@@ -6,7 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useSendInvitationMutation } from '@services/api'
 import { AppDispatch, clearToken } from '@store'
-import './styles.scss'
 
 interface IHomeProps {
   children?: React.ReactNode;

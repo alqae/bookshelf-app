@@ -1,0 +1,44 @@
+@import "@/styles/init";
+
+.footer {
+  background-color: map-get($theme-colors, tertiary);
+  height: $footer-height;
+
+  img {
+    width: 204px;
+  }
+  
+  &__banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 88px;
+    padding: 20px 0;
+  }
+
+  &__actions button svg {
+    margin-right: 16px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__terms_and_policy {
+    background-color: rgba(0, 0, 0, 0.87);
+    padding: 12px 0;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0;
+
+    a {
+      @include font(body, sm, $color-white);
+
+      &:hover {
+        color: map-get($theme-colors, primary);
+      }
+    }
+  }
+}

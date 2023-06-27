@@ -1,0 +1,56 @@
+// Styles to over-ride Bootstrap.
+// see: https://getbootstrap.com/docs/5.2/utilities/flex/ for more utilities.
+
+.container-fluid {
+  @include px(3);
+  max-width: to-rem(2400);
+
+  @include media-breakpoint-up(sm) {
+    @include px(5);
+  }
+
+  @include media-breakpoint-up(lg) {
+    @include px(8);
+  }
+
+  @include media-breakpoint-up(xxl) {
+    @include px(10);
+  }
+
+  // We over-ride the global .row padding.
+  .row {
+    --bs-gutter-x: 1rem;
+    --bs-gutter-y: 0;
+
+    @include media-breakpoint-up(lg) {
+      --bs-gutter-x: 1.5rem;
+    }
+    @include media-breakpoint-up(xxl) {
+      --bs-gutter-x: 2rem;
+    }
+  }
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+.panel {
+  border-radius: 20px;
+  padding: 24px;
+  height: 100%;
+  overflow-y: auto;
+
+  &-dark {
+    background-color: $color-dark-gray;
+  }
+}

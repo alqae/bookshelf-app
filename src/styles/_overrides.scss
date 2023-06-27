@@ -1,0 +1,83 @@
+.container {
+  line-height: 0;
+}
+
+.navbar-nav {
+  flex-direction: row;
+
+  .nav-link {
+    @include font(extra, menu, rgba(255, 255, 255, 0.6));
+
+    &.active,
+    &:hover {
+      color: map-get($theme-colors, primary);
+    }
+  }
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  height: 56px;
+}
+
+button:has(svg) {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  color: $color-white;
+
+  &.dark {
+    color: $color-black;
+  }
+
+  &:hover svg {
+    fill: map-get($theme-colors, primary);
+  }
+}
+
+.ripple {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  animation-name: ripple;
+  animation-duration: 1s;
+  opacity: 0;
+  border-radius: 50%;
+}
+
+@keyframes ripple {
+  
+  0% {
+    opacity: .4;
+    transform: scale(0);
+    background: $color-white;
+  }
+  
+  100% {
+    opacity: 0;
+    transform: scale(100);
+    background: $color-white;
+  }
+}
+
+.form-floating > label {
+  line-height: initial;
+  padding-bottom: 0;
+  height: auto;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition-property: background-color, background-image;
+  transition-duration: 9999s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-bottom: 0;
+}
