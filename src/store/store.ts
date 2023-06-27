@@ -7,14 +7,12 @@ import thunk from 'redux-thunk'
 import { api } from '@services/api'
 
 import authReducer from './reducers/auth.reducer'
-// import sharedReducer from './reducers/shared.reducer'
-// import searchReducer from './reducers/search.reducer'
+import sharedReducer from './reducers/shared.reducer'
 
 const reducer = combineReducers({
   auth: authReducer,
+  shared: sharedReducer,
   [api.reducerPath]: api.reducer,
-  // shared: sharedReducer,
-  // search: searchReducer,
 })
 
 const middleware = [

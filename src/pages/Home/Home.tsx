@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useSendInvitationMutation } from '@services/api'
-import { AppDispatch, clearToken } from '@store'
+import { AppDispatch, addToast, clearToken } from '@store'
 
 interface IHomeProps {
   children?: React.ReactNode;
@@ -46,9 +46,71 @@ const Home:React.FC<IHomeProps> = () => {
         {...methods.register('email')}
       />
       <br />
-      <button type="submit">Send Invitation</button>
+      <button type="submit">Send Invitation to </button>
       <br />
       <button onClick={() => dispatch(clearToken())}>Log Out</button>
+      <br />
+      <button
+        type="button"
+        onClick={() => dispatch(addToast({
+          text: 'Example tosat with variant success',
+          variant: 'success',
+          position: 'topLeft',
+        }))}
+      >
+        topLeft
+      </button>
+      <button
+        type="button"
+        onClick={() => dispatch(addToast({
+          text: 'Example tosat with variant success',
+          variant: 'success',
+          position: 'topCenter',
+        }))}
+      >
+        topCenter
+      </button>
+      <button
+        type="button"
+        onClick={() => dispatch(addToast({
+          text: 'Example tosat with variant success',
+          variant: 'success',
+          position: 'topRight',
+        }))}
+      >
+        topRight
+      </button>
+      <br />
+      <button
+        type="button"
+        onClick={() => dispatch(addToast({
+          text: 'Example tosat with variant success',
+          variant: 'success',
+          position: 'bottomLeft',
+        }))}
+      >
+        bottomLeft
+      </button>
+      <button
+        type="button"
+        onClick={() => dispatch(addToast({
+          text: 'Example tosat with variant success',
+          variant: 'success',
+          position: 'bottomCenter',
+        }))}
+      >
+        bottomCenter
+      </button>
+      <button
+        type="button"
+        onClick={() => dispatch(addToast({
+          text: 'Example tosat with variant success',
+          variant: 'success',
+          position: 'bottomRight',
+        }))}
+      >
+        bottomRight
+      </button>
     </form>
   );
 }

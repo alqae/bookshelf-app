@@ -1,0 +1,42 @@
+$toast-separation: 12px;
+
+// .toast_wrapper {}
+
+.toast_container {
+	font-size: 14px;
+	box-sizing: border-box;
+	position: fixed;
+	z-index: 999999;
+}
+
+.top_right {
+	top: $toast-separation;
+	right: $toast-separation;
+}
+
+.top_left {
+  top: $toast-separation;
+  left: $toast-separation;
+}
+
+.top_center {
+  top: $toast-separation;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom_left {
+	bottom: $toast-separation;
+	left: $toast-separation;
+}
+
+.bottom_center {
+  bottom: $toast-separation;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom_right {
+	bottom: $toast-separation;
+	right: $toast-separation;
+}

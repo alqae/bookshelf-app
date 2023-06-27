@@ -17,8 +17,10 @@ import SignIn from '@pages/SignIn'
 import Home from '@pages/Home/Home'
 
 import Layout from '@components/Layout'
+import ToastPortal from '@components/ToastPortal'
 
 import '@/styles/globals.scss'
+import 'animate.css/animate.css'
 
 const AuthenticatedRoute = () => {
   const auth = useSelector<RootState>((store) => !!store.auth.token)
@@ -63,7 +65,10 @@ function App() {
   }, [])
 
   return (
-    <RouterProvider router={router} fallbackElement={<span>Fallback?</span>} />
+    <>
+      <RouterProvider router={router} fallbackElement={<span>Fallback?</span>} />
+      <ToastPortal />
+    </>
   )
 }
 

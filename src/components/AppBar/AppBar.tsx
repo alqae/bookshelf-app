@@ -5,7 +5,7 @@ import { BiBookmark } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import { AiOutlineSearch, AiOutlineShopping } from 'react-icons/ai'
 
-import { useAuthenticated } from '@hooks/authenticated.hook'
+import { useAuthenticated } from '@/hooks/useAuthenticated'
 import styles from './app-bar.module.scss'
 import Logo from '@assets/logo.svg'
 
