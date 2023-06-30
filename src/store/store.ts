@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import { configureStore, combineReducers, MiddlewareAPI, Middleware, isRejectedWithValue } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
 import logger from 'redux-logger'
@@ -7,13 +7,28 @@ import thunk from 'redux-thunk'
 import { api } from '@services/api'
 
 import authReducer from './reducers/auth.reducer'
-import sharedReducer from './reducers/shared.reducer'
+import sharedReducer, { addToast } from './reducers/shared.reducer'
 
 const reducer = combineReducers({
   auth: authReducer,
   shared: sharedReducer,
   [api.reducerPath]: api.reducer,
 })
+
+export const httpErrorInterceptor: Middleware = (api: MiddlewareAPI) => (next) => (action) => {
+  if (isRejectedWithValue(action)) {
+    console.warn('We got a rejected action!', api)
+    api.dispatch(
+      addToast({
+        variant: 'danger',
+        text: action.payload.error,
+        position: 'bottomCenter'
+      })
+    )
+  }
+
+  return next(action)
+}
 
 const middleware = [
   thunk,
@@ -27,6 +42,7 @@ const middleware = [
       ]
   ),
   api.middleware,
+  httpErrorInterceptor,
 ]
 
 const persistConfig = {

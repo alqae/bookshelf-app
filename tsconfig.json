@@ -28,7 +28,6 @@
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
       "@styles/*": ["src/styles/*"],
-      "@types/*": ["src/types/*"],
       "@assets/*": ["src/assets/*"],
       "@services/*": ["src/services/*"],
       "@store/*": ["src/store/*"],

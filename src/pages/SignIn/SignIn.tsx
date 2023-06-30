@@ -4,10 +4,14 @@ import classNames from 'classnames'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Link, redirect, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
-import { useSignInMutation, useActivateUserMutation, useAcceptInvitationMutation } from '@services/api'
-import { AppDispatch, setToken } from '@store'
+import { AppDispatch, addToast, setToken } from '@store'
+import {
+  useSignInMutation,
+  useActivateUserMutation,
+  useAcceptInvitationMutation
+} from '@services/api'
 
 interface ISignInProps {
   children?: React.ReactNode
@@ -71,19 +75,9 @@ const SignIn: React.FC<ISignInProps> = () => {
   })
 
   const onSignIn = async (values: SignInForm) => {
-    try {
-      const response = await signIn(values)
-      if ('data' in response) {
-        dispatch(setToken(response.data.token))
-        redirect('/')
-      } else if ('error' in response) {
-        throw new Error('Unathorized')
-      }
-
-      console.log(response)
-    } catch (error) {
-      console.log(error)
-    }
+    const response = await signIn(values)
+    if ('error' in response) return
+    dispatch(setToken(response.data.data.token))
   }
 
   const invitationMethods = useForm<InvitationForm>({
@@ -98,39 +92,23 @@ const SignIn: React.FC<ISignInProps> = () => {
   })
 
   const onInvitationConfirm = async (values: InvitationForm) => {
-    try {
-      if (!token) return
-      const response = await acceptInvitation({
-        ...values,
-        token,
-      })
-
-      if ('error' in response) {
-        alert(response.error)
-        return
-      }
-
-      clearQueryParams()
-      invitationMethods.reset()
-    } catch (error) {
-      console.log(error)
-    }
+    if (!token) return
+    const response = await acceptInvitation({ ...values, token, })
+    if ('error' in response) return
+    clearQueryParams()
+    invitationMethods.reset()
   }
 
   const onVerify = async () => {
-    try {
-      if (!token) return
-      const response = await activateUser(token)
-      if ('error' in response) {
-        alert(response.error)
-        return
-      }
-
-      clearQueryParams()
-      return
-    } catch (error) {
-      console.log(error)
-    }
+    if (!token) return
+    const response = await activateUser(token)
+    if ('error' in response) return
+    clearQueryParams()
+    dispatch(addToast({
+      variant: 'success',
+      text: 'Your email has been verified',
+      position: 'bottomCenter'
+    }))
   }
 
   const clearQueryParams = () => {

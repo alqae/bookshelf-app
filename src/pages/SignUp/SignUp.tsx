@@ -1,11 +1,11 @@
 import React from 'react'
 import * as Yup from 'yup'
+import classNames from 'classnames'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useSignUpMutation } from '@services/api'
-import classNames from 'classnames'
 
 interface ISignUpProps {
   children?: React.ReactNode
@@ -35,7 +35,7 @@ const formSchema = Yup.object().shape({
     .required('Confirm Password is required')
     .oneOf([Yup.ref('password')], 'Passwords must match'),
   termsAndConditions: Yup.boolean()
-    .required("Terms and Conditions is required")
+    .required('Terms and Conditions is required')
 })
 
 const SignUp: React.FC<ISignUpProps> = () => {
@@ -56,20 +56,14 @@ const SignUp: React.FC<ISignUpProps> = () => {
   })
 
   const onSubmit = async (values: SignUpForm) => {
-    try {
-      const response = await signUp({
-        email: values.email,
-        firstName: values.firstName,
-        lastName: values.lastName,
-        password: values.password
-      })
-      if ('error' in response) {
-        return alert('Something went wrong')
-      }
-      return navigate('/auth/sign-in')
-    } catch (error) {
-      console.log(error)
-    }
+    const response = await signUp({
+      email: values.email,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      password: values.password
+    })
+    if ('error' in response) return
+    return navigate('/auth/sign-in')
   }
 
   return (

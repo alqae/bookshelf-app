@@ -15,14 +15,14 @@ export interface IToastProps {
   variant: 'success' | 'info' | 'danger' | 'warning'
   id: string
   text: string
-  position: 'topLeft' | 'topRight' | 'topCenter' | 'bottomLeft' | 'bottomRight' | 'bottomCenter'
+  position?: 'topLeft' | 'topRight' | 'topCenter' | 'bottomLeft' | 'bottomRight' | 'bottomCenter'
 }
 
 const Toast:React.FC<IToastProps> = ({
   variant = 'info',
   text,
   id,
-  position
+  position = 'topLeft'
 }) => {
   const dispatch = useDispatch<AppDispatch>()
 

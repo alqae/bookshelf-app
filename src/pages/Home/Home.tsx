@@ -8,11 +8,11 @@ import { useSendInvitationMutation } from '@services/api'
 import { AppDispatch, addToast, clearToken } from '@store'
 
 interface IHomeProps {
-  children?: React.ReactNode;
+  children?: React.ReactNode
 }
 
 interface InvitationForm {
-  email: string;
+  email: string
 }
 
 const formSchema = Yup.object().shape({
@@ -31,10 +31,10 @@ const Home:React.FC<IHomeProps> = () => {
 
   const onSendInvitation = async (values: InvitationForm) => {
     try {
-      const response = await sendInvitation(values);
+      const response = await sendInvitation(values)
       console.log(response)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
@@ -112,7 +112,7 @@ const Home:React.FC<IHomeProps> = () => {
         bottomRight
       </button>
     </form>
-  );
+  )
 }
 
 export default Home

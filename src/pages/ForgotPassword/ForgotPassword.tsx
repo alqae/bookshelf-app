@@ -2,10 +2,12 @@ import React from 'react'
 import * as Yup from 'yup'
 import classNames from 'classnames'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { useForgotPasswordMutation, useResetPasswordMutation } from '@services/api'
+import { AppDispatch, addToast } from '@store'
 
 interface IForgotPasswordProps {
   children?: React.ReactNode
@@ -40,6 +42,7 @@ const ForgotPassword: React.FC<IForgotPasswordProps> = () => {
   const [resetPassword] = useResetPasswordMutation()
   const [forgotPassword] = useForgotPasswordMutation()
   const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
   const token = React.useMemo(() => searchParams.get('token'), [searchParams])
 
   const forgotPasswordMethods = useForm<ForgotPasswordForm>({
@@ -58,33 +61,28 @@ const ForgotPassword: React.FC<IForgotPasswordProps> = () => {
   })
 
   const onForgotPassword = async (values: ForgotPasswordForm) => {
-    try {
-      const response = await forgotPassword(values)
-      console.log(response)
-      if ('error' in response) {
-        return alert('Something went wrong')
-      }
+    const response = await forgotPassword(values)
+    if ('error' in response) return
+    dispatch(addToast({
+      variant: 'info',
+      text: response.data.message,
+      position: 'bottomCenter'
+    }))
 
-      alert('Check your email for a link to reset your password. If it doesn’t appear within a few minutes, check your spam folder.')
-      forgotPasswordMethods.reset()
-      return
-    } catch (error) {
-      console.error(error)
-    }
+    forgotPasswordMethods.reset()
   }
 
   const onResetPassword = async (values: resetPasswordForm) => {
     if (!token) return
-    try {
-      const response = await resetPassword({ token, password: values.password })
-      if ('error' in response) {
-        alert('Something went wrong')
-        return
-      }
-      return navigate('/auth/sign-in')
-    } catch (error) {
-      console.error(error)
-    }
+    const response = await resetPassword({ token, password: values.password })
+    if ('error' in response) return
+    dispatch(addToast({
+      variant: 'info',
+      text: response.data.message,
+      position: 'bottomCenter'
+    }))
+    resetPasswordMethods.reset()
+    return navigate('/auth/sign-in')
   }
 
   if (token) {

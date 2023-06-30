@@ -1,11 +1,13 @@
 import React from 'react'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { BiBookmark } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
-import { AiOutlineSearch, AiOutlineShopping } from 'react-icons/ai'
+import { AiOutlineLogout, AiOutlineSearch, AiOutlineShopping } from 'react-icons/ai'
 
 import { useAuthenticated } from '@/hooks/useAuthenticated'
+import { AppDispatch, clearToken } from '@store'
 import styles from './app-bar.module.scss'
 import Logo from '@assets/logo.svg'
 
@@ -16,6 +18,9 @@ interface IAppBarProps {
 const AppBar: React.FC<IAppBarProps> = () => {
   const isAuthenticated = useAuthenticated()
   const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
+
+  const logOut = () => dispatch(clearToken())
 
   return (
     <header className={classNames(styles.appbar, 'navbar')}>
@@ -47,8 +52,14 @@ const AppBar: React.FC<IAppBarProps> = () => {
             </button>
           </div>
 
-          {!isAuthenticated && (
-            <button className="btn btn-primary" onClick={() => navigate("/auth/sign-in")}>LOGIN</button>
+          {isAuthenticated ? (
+            <button onClick={logOut} className="ms-1">
+              <AiOutlineLogout />
+            </button>
+          ) : (
+            <button className="btn btn-primary" onClick={() => navigate("/auth/sign-in")}>
+              LOGIN
+            </button>
           )}
         </div>
       </div>

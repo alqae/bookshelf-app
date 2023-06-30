@@ -51,14 +51,14 @@ const router = createBrowserRouter(
 function App() {
   // Ripple Effect to Buttons
   React.useEffect(() => {
-    const className = 'btn';
-    const ripple = document.createElement("div")
+    const className = 'btn'
+    const ripple = document.createElement('div')
     ripple.classList.add('ripple')
 
     document.addEventListener('mousedown', (e) => {
       const target = e.target as Element
       if (target.classList.contains(className)) {
-        ripple.setAttribute("style", "top: " + e.offsetY + "px; left: " + e.offsetX + "px");
+        ripple.setAttribute('style', `top: ${e.offsetY}px; left: ${e.offsetX}px`)
         target.appendChild(ripple)
       }
     })

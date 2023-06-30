@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import {
+
+import type {
   AceptInvitationBody,
   AuthenticationBody,
   AuthenticationResponse,
@@ -9,26 +10,30 @@ import {
   ForgotPasswordBody,
   IResponse,
 } from '../types'
+import { RootState } from '@store'
 
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.API_URL || 'http://localhost:8080',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(localStorage.getItem('token') ? {'Authorization': `Bearer ${localStorage.getItem('token')}`} : {}),
+    prepareHeaders(headers, api) {
+      const state = api.getState() as RootState
+      const token = state.auth.token ?? localStorage.getItem('token')
+      if (token) headers.set('Authorization', `Bearer ${token}`)
+      return headers
     },
     responseHandler: async (response) => {
       const json = await response.json()
-      if (response.ok) {
-        return json
-      }
+      if (response.ok) return json
       return Promise.reject(json?.message)
+    },
+    validateStatus: (response) => {
+      return response.status != 200 || response.status.toString() != "OK"
     },
   }),
   endpoints: (builder) => ({
-    signIn: builder.mutation<AuthenticationResponse, AuthenticationBody>({
+    signIn: builder.mutation<IResponse<AuthenticationResponse>, AuthenticationBody>({
       query: (body) => ({
         url: 'sign-in',
         method: 'POST',
@@ -63,14 +68,14 @@ export const api = createApi({
         body,
       }),
     }),
-    forgotPassword: builder.mutation<void, ForgotPasswordBody>({
+    forgotPassword: builder.mutation<IResponse<void>, ForgotPasswordBody>({
       query: (body) => ({
         url: 'forgot-password',
         method: 'POST',
         body: body,
       }),
     }),
-    resetPassword: builder.mutation<void, ResetPasswordBody>({
+    resetPassword: builder.mutation<IResponse<void>, ResetPasswordBody>({
       query: (body) => ({
         url: 'reset-password',
         method: 'POST',
