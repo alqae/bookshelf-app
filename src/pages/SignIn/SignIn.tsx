@@ -123,153 +123,153 @@ const SignIn: React.FC<ISignInProps> = () => {
     }
   }, [token, type])
 
-  if (token && type && type === TOKEN_TYPE.INVITATION) {
-    return (
-      <form onSubmit={invitationMethods.handleSubmit(onInvitationConfirm)} className="panel panel-dark">
-        <div className="col-6 vstack gap-2">
-          <div>
-            <h4>Welcome</h4>
-            <p>We need a little more information to complete your profile</p>
-          </div>
-
-          <div className="form-floating">
-            <input
-              type="text"
-              placeholder="First Name"
-              className={classNames(
-                'form-control',
-                {
-                  'is-invalid': invitationMethods.formState.errors.firstName,
-                  'is-valid': !invitationMethods.formState.errors.firstName && invitationMethods.formState.dirtyFields.firstName,
-                }
-              )}
-              {...invitationMethods.register('firstName')}
-            />
-            <label htmlFor="last-name">First Name</label>
-            <div className="invalid-feedback">
-              {invitationMethods.formState.errors.firstName?.message}
-            </div>
-          </div>
-
-          <div className="form-floating">
-            <input
-              id="last-name"
-              type="text"
-              placeholder="Last Name"
-              className={classNames(
-                'form-control',
-                {
-                  'is-invalid': invitationMethods.formState.errors.lastName,
-                  'is-valid': !invitationMethods.formState.errors.lastName && invitationMethods.formState.dirtyFields.lastName,
-                }
-              )}
-              {...invitationMethods.register('lastName')}
-            />
-            <label htmlFor="last-name">Last Name</label>
-            <div className="invalid-feedback">
-              {invitationMethods.formState.errors.lastName?.message}
-            </div>
-          </div>
-
-          <div className="form-floating">
-            <input
-              id="password"
-              type="password"
-              placeholder="Password"
-              className={classNames(
-                'form-control',
-                {
-                  'is-invalid': invitationMethods.formState.errors.password,
-                  'is-valid': !invitationMethods.formState.errors.password && invitationMethods.formState.dirtyFields.password,
-                }
-              )}
-              {...invitationMethods.register('password')}
-            />
-            <label htmlFor="password">Password</label>
-            <div className="invalid-feedback">
-              {invitationMethods.formState.errors.password?.message}
-            </div>
-          </div>
-
-          <div className="form-floating">
-            <input
-              id="confirm-password"
-              type="password"
-              placeholder="Confirm Password"
-              className={classNames(
-                'form-control',
-                {
-                  'is-invalid': invitationMethods.formState.errors.confirmPassword,
-                  'is-valid': !invitationMethods.formState.errors.confirmPassword && invitationMethods.formState.dirtyFields.confirmPassword,
-                }
-              )}
-              {...invitationMethods.register('confirmPassword')}
-            />
-            <label htmlFor="confirm-password">Confirm Password</label>
-            <div className="invalid-feedback">
-              {invitationMethods.formState.errors.confirmPassword?.message}
-            </div>
-          </div>
-
-          <button className="btn btn-primary" type="submit">Save</button>
-        </div>
-      </form>
-    )
-  }
-
   return (
-    <form onSubmit={signInMethods.handleSubmit(onSignIn)} className="panel panel-dark">
-      <div className="col-6 vstack gap-2">
-        <div className="d-flex justify-content-between align-items-center">
-          <h4>Sign In</h4>
-          <Link to="/auth/sign-up" className="link">Don't have an account? <b>create</b></Link>
-        </div>
+    <section className="container">
+      {token && type && type === TOKEN_TYPE.INVITATION ? (
+        <form onSubmit={invitationMethods.handleSubmit(onInvitationConfirm)} className="panel panel-dark">
+          <div className="col-6 vstack gap-2">
+            <div>
+              <h5>Welcome</h5>
+              <p>We need a little more information to complete your profile</p>
+            </div>
 
-        <div className="form-floating">
-          <input
-            id="email"
-            type="email"
-            className={classNames(
-              'form-control',
-              {
-                'is-invalid': signInMethods.formState.errors.email,
-                'is-valid': !signInMethods.formState.errors.email && signInMethods.formState.dirtyFields.email,
-              }
-            )}
-            {...signInMethods.register('email')}
-          />
-          <label htmlFor="email">Email</label>
-          <div className="invalid-feedback">
-            {signInMethods.formState.errors.email?.message}
+            <div className="form-floating">
+              <input
+                type="text"
+                placeholder="First Name"
+                className={classNames(
+                  'form-control',
+                  {
+                    'is-invalid': invitationMethods.formState.errors.firstName,
+                    'is-valid': !invitationMethods.formState.errors.firstName && invitationMethods.formState.dirtyFields.firstName,
+                  }
+                )}
+                {...invitationMethods.register('firstName')}
+              />
+              <label htmlFor="last-name">First Name</label>
+              <div className="invalid-feedback">
+                {invitationMethods.formState.errors.firstName?.message}
+              </div>
+            </div>
+
+            <div className="form-floating">
+              <input
+                id="last-name"
+                type="text"
+                placeholder="Last Name"
+                className={classNames(
+                  'form-control',
+                  {
+                    'is-invalid': invitationMethods.formState.errors.lastName,
+                    'is-valid': !invitationMethods.formState.errors.lastName && invitationMethods.formState.dirtyFields.lastName,
+                  }
+                )}
+                {...invitationMethods.register('lastName')}
+              />
+              <label htmlFor="last-name">Last Name</label>
+              <div className="invalid-feedback">
+                {invitationMethods.formState.errors.lastName?.message}
+              </div>
+            </div>
+
+            <div className="form-floating">
+              <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                className={classNames(
+                  'form-control',
+                  {
+                    'is-invalid': invitationMethods.formState.errors.password,
+                    'is-valid': !invitationMethods.formState.errors.password && invitationMethods.formState.dirtyFields.password,
+                  }
+                )}
+                {...invitationMethods.register('password')}
+              />
+              <label htmlFor="password">Password</label>
+              <div className="invalid-feedback">
+                {invitationMethods.formState.errors.password?.message}
+              </div>
+            </div>
+
+            <div className="form-floating">
+              <input
+                id="confirm-password"
+                type="password"
+                placeholder="Confirm Password"
+                className={classNames(
+                  'form-control',
+                  {
+                    'is-invalid': invitationMethods.formState.errors.confirmPassword,
+                    'is-valid': !invitationMethods.formState.errors.confirmPassword && invitationMethods.formState.dirtyFields.confirmPassword,
+                  }
+                )}
+                {...invitationMethods.register('confirmPassword')}
+              />
+              <label htmlFor="confirm-password">Confirm Password</label>
+              <div className="invalid-feedback">
+                {invitationMethods.formState.errors.confirmPassword?.message}
+              </div>
+            </div>
+
+            <button className="btn btn-primary" type="submit">Save</button>
           </div>
-        </div>
+        </form>
+      ) : (
+        <form onSubmit={signInMethods.handleSubmit(onSignIn)} className="panel panel-dark">
+          <div className="col-6 vstack gap-2">
+            <div className="d-flex justify-content-between align-items-center">
+              <h5>Sign In</h5>
+              <Link to="/auth/sign-up" className="link">Don't have an account? <b>create</b></Link>
+            </div>
 
-        <div className="form-floating">
-          <input
-            id="password"
-            type="password"
-            className={classNames(
-              'form-control',
-              {
-                'is-invalid': signInMethods.formState.errors.password,
-                'is-valid': !signInMethods.formState.errors.password && signInMethods.formState.dirtyFields.password,
-              }
-            )}
-            {...signInMethods.register('password')}
-          />
-          <label htmlFor="password">Password</label>
-          <div className="invalid-feedback">
-            {signInMethods.formState.errors.password?.message}
+            <div className="form-floating">
+              <input
+                id="email"
+                type="email"
+                className={classNames(
+                  'form-control',
+                  {
+                    'is-invalid': signInMethods.formState.errors.email,
+                    'is-valid': !signInMethods.formState.errors.email && signInMethods.formState.dirtyFields.email,
+                  }
+                )}
+                {...signInMethods.register('email')}
+              />
+              <label htmlFor="email">Email</label>
+              <div className="invalid-feedback">
+                {signInMethods.formState.errors.email?.message}
+              </div>
+            </div>
+
+            <div className="form-floating">
+              <input
+                id="password"
+                type="password"
+                className={classNames(
+                  'form-control',
+                  {
+                    'is-invalid': signInMethods.formState.errors.password,
+                    'is-valid': !signInMethods.formState.errors.password && signInMethods.formState.dirtyFields.password,
+                  }
+                )}
+                {...signInMethods.register('password')}
+              />
+              <label htmlFor="password">Password</label>
+              <div className="invalid-feedback">
+                {signInMethods.formState.errors.password?.message}
+              </div>
+            </div>
+
+            <button className="btn btn-primary" type="submit">Sign In</button>
+
+            <div className="d-flex justify-content-end">
+              <Link to="/auth/forgot-password" className="link">Forgot Password?</Link>
+            </div>
           </div>
-        </div>
-
-        <button className="btn btn-primary" type="submit">Sign In</button>
-
-        <div className="d-flex justify-content-end">
-          <Link to="/auth/forgot-password" className="link">Forgot Password?</Link>
-        </div>
-      </div>
-    </form>
+        </form>
+      )}
+    </section>
   )
 }
 

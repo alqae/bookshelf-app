@@ -1,7 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-import styles from './layout.module.scss'
 import AppBar from '../AppBar/AppBar'
 import Footer from '../Footer'
 
@@ -13,7 +12,7 @@ const Layout:React.FC<ILayoutProps> = () => {
   return (
     <>
       <AppBar />
-      <main className={styles.layout}>
+      <main>
         <Outlet />
       </main>
       <Footer />

@@ -23,45 +23,45 @@ const AppBar: React.FC<IAppBarProps> = () => {
   const logOut = () => dispatch(clearToken())
 
   return (
-    <header className={classNames(styles.appbar, 'navbar')}>
-      <div className="container">
-        <Link to="/" className="navbar-brand">
-          <img src={Logo} />
-        </Link>
+    <header className="container my-3">
+      <div className={classNames(styles.appbar, 'navbar', 'p-3')}>
+      <Link to="/" className="navbar-brand">
+        <img src={Logo} />
+      </Link>
 
-        <nav className={classNames('navbar-nav', styles.appbar__links)}>
-          <Link className="nav-link" to="/">Books</Link>
-          <Link className="nav-link" to="/">Authors</Link>
-          <Link className="nav-link" to="/">What to Read?</Link>
-          <Link className="nav-link" to="/">Gift Ideas</Link>
-          <Link className="nav-link" to="/">About Us</Link>
-        </nav>
+      <nav className={classNames('navbar-nav', styles.appbar__links)}>
+        <Link className="nav-link" to="/">Books</Link>
+        <Link className="nav-link" to="/">Authors</Link>
+        <Link className="nav-link" to="/">What to Read?</Link>
+        <Link className="nav-link" to="/">Gift Ideas</Link>
+        <Link className="nav-link" to="/">About Us</Link>
+      </nav>
 
-        <div className={styles.appbar__actions}>
-          <div className={classNames({ 'me-3': !isAuthenticated })}>
-            <button>
-              <AiOutlineSearch className="me-1" />
-            </button>
+      <div className={styles.appbar__actions}>
+        <div className={classNames({ 'me-3': !isAuthenticated })}>
+          <button>
+            <AiOutlineSearch className="me-1" />
+          </button>
 
-            <button>
-              <BiBookmark className="me-1" />
-            </button>
+          <button>
+            <BiBookmark className="me-1" />
+          </button>
 
-            <button>
-              <AiOutlineShopping />
-            </button>
-          </div>
-
-          {isAuthenticated ? (
-            <button onClick={logOut} className="ms-1">
-              <AiOutlineLogout />
-            </button>
-          ) : (
-            <button className="btn btn-primary" onClick={() => navigate("/auth/sign-in")}>
-              LOGIN
-            </button>
-          )}
+          <button>
+            <AiOutlineShopping />
+          </button>
         </div>
+
+        {isAuthenticated ? (
+          <button onClick={logOut} className="ms-1">
+            <AiOutlineLogout />
+          </button>
+        ) : (
+          <button className="btn btn-primary" onClick={() => navigate("/auth/sign-in")}>
+            LOGIN
+          </button>
+        )}
+      </div>
       </div>
     </header>
   )

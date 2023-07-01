@@ -44,13 +44,117 @@
   backdrop-filter: blur(4px);
 }
 
+
+// Custom components for the layout.
 .panel {
   border-radius: 20px;
   padding: 24px;
   height: 100%;
   overflow-y: auto;
 
+  &-search,
+  &-question,
+  &-percentage,
+  &-gift,
   &-dark {
     background-color: $color-dark-gray;
   }
+
+  &-search {
+    background-image: url(../assets/bg-search.svg);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+  }
+
+  &-bod {
+    background-color: #ccc;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 82px;
+      height: 82px;
+      background-image: url(../assets/book-day-badge.svg);
+      background-repeat: no-repeat;
+    }
+  }
+
+  &-question {
+    background-image: url(../assets/bg-question.svg);
+    background-repeat: no-repeat;
+    background-position: 87% bottom;
+  }
+
+  &-percentage {
+    background-image: url(../assets/bg-percentage.svg);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+  }
+
+  &-gift {
+    background-image: url(../assets/bg-gift.svg);
+    background-repeat: no-repeat;
+    background-position: 12% center;
+  }  
+}
+
+// Sizing for the main content area.
+
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+
+  section {
+    margin-bottom: 24px;
+  }
+}
+
+// Scrollbar
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #397524 rgba(0, 0, 0, 0.4);
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background-color: map-get($theme-colors, tertiary);
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: map-get($theme-colors, tertiary);
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: map-get($theme-colors, tertiary);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: map-get($theme-colors, primary);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: map-get($theme-colors, primary);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: map-get($theme-colors, primary);
 }

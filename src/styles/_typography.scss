@@ -55,6 +55,43 @@
   font-display: swap;
 }
 
+
+@font-face {
+  font-family: 'Literata';
+  src: url('/fonts/Literata/Literata-Light.woff2') format('woff2'),
+      url('/fonts/Literata/Literata-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Literata';
+  src: url('/fonts/Literata/Literata-Regular.woff2') format('woff2'),
+      url('/fonts/Literata/Literata-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Literata';
+  src: url('/fonts/Literata/Literata-Medium.woff2') format('woff2'),
+      url('/fonts/Literata/Literata-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Literata';
+  src: url('/fonts/Literata/Literata-Bold.woff2') format('woff2'),
+      url('/fonts/Literata/Literata-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -85,11 +122,11 @@ h4 {
 }
 
 h5 {
-  @include font(headings, xs, map-get($theme-colors, primary));
+  @include font(headings, xs, $color-white);
 }
 
 .link {
-  @include font(body, md, rgba(255, 255, 255, 0.6));
+  @include font(extra, link, rgba(255, 255, 255, 0.6));
 
   b {
     color: $color-white;
@@ -98,7 +135,7 @@ h5 {
 }
 
 p {
-  @include font(body, md, map-get($theme-colors, primary));
+  @include font(body, md, $color-white);
 
   &:only-child {
     margin-bottom: 0;

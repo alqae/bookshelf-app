@@ -3,12 +3,6 @@
 .appbar {
   background-color: map-get($theme-colors, tertiary);
   border-radius: 20px;
-  padding: 24px;
-  margin: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 96px;
 
   img {
     width: 166px;

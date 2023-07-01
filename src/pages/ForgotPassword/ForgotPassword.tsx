@@ -85,86 +85,86 @@ const ForgotPassword: React.FC<IForgotPasswordProps> = () => {
     return navigate('/auth/sign-in')
   }
 
-  if (token) {
-    return (
-      <form onSubmit={resetPasswordMethods.handleSubmit(onResetPassword)} className="panel panel-dark">
-        <div className="col-6 vstack gap-2">
-          <h4>Reset Password</h4>
-
-          <div className="form-floating">
-            <input
-              id="password"
-              type="password"
-              placeholder="Password"
-              className={classNames(
-                'form-control',
-                {
-                  'is-invalid': resetPasswordMethods.formState.errors.password,
-                  'is-valid': !resetPasswordMethods.formState.errors.password && resetPasswordMethods.formState.dirtyFields.password,
-                }
-              )}
-              {...resetPasswordMethods.register('password')}
-            />
-            <label htmlFor="password">Password</label>
-            <div className="invalid-feedback">
-              {resetPasswordMethods.formState.errors.password?.message}
-            </div>
-          </div>
-
-          <div className="form-floating">
-            <input
-              id="confirm-password"
-              type="password"
-              placeholder="Confirm Password"
-
-              className={classNames(
-                'form-control',
-                {
-                  'is-invalid': resetPasswordMethods.formState.errors.confirmPassword,
-                  'is-valid': !resetPasswordMethods.formState.errors.confirmPassword && resetPasswordMethods.formState.dirtyFields.confirmPassword,
-                }
-              )}
-              {...resetPasswordMethods.register('confirmPassword')}
-            />
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <div className="invalid-feedback">
-              {resetPasswordMethods.formState.errors.confirmPassword?.message}
-            </div>
-          </div>
-
-          <button className="btn btn-primary" type="submit">Reset Password</button>
-        </div>
-      </form>
-    )
-  }
-
   return (
-    <form onSubmit={forgotPasswordMethods.handleSubmit(onForgotPassword)} className="panel panel-dark">
-      <div className="col-6 vstack gap-2">
-        <h4>Forgot Password</h4>
+    <section className="container">
+      {token ? (
+        <form onSubmit={resetPasswordMethods.handleSubmit(onResetPassword)} className="panel panel-dark">
+          <div className="col-6 vstack gap-2">
+            <h5>Reset Password</h5>
 
-        <div className="form-floating">
-          <input
-            id="email"
-            type="email"
-            className={classNames(
-              'form-control',
-              {
-                'is-invalid': forgotPasswordMethods.formState.errors.email,
-                'is-valid': !forgotPasswordMethods.formState.errors.email && forgotPasswordMethods.formState.dirtyFields.email,
-              }
-            )}
-            {...forgotPasswordMethods.register('email')}
-          />
-          <label htmlFor="email">Email</label>
-          <div className="invalid-feedback">
-            {forgotPasswordMethods.formState.errors.email?.message}
+            <div className="form-floating">
+              <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                className={classNames(
+                  'form-control',
+                  {
+                    'is-invalid': resetPasswordMethods.formState.errors.password,
+                    'is-valid': !resetPasswordMethods.formState.errors.password && resetPasswordMethods.formState.dirtyFields.password,
+                  }
+                )}
+                {...resetPasswordMethods.register('password')}
+              />
+              <label htmlFor="password">Password</label>
+              <div className="invalid-feedback">
+                {resetPasswordMethods.formState.errors.password?.message}
+              </div>
+            </div>
+
+            <div className="form-floating">
+              <input
+                id="confirm-password"
+                type="password"
+                placeholder="Confirm Password"
+
+                className={classNames(
+                  'form-control',
+                  {
+                    'is-invalid': resetPasswordMethods.formState.errors.confirmPassword,
+                    'is-valid': !resetPasswordMethods.formState.errors.confirmPassword && resetPasswordMethods.formState.dirtyFields.confirmPassword,
+                  }
+                )}
+                {...resetPasswordMethods.register('confirmPassword')}
+              />
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <div className="invalid-feedback">
+                {resetPasswordMethods.formState.errors.confirmPassword?.message}
+              </div>
+            </div>
+
+            <button className="btn btn-primary" type="submit">Reset Password</button>
           </div>
-        </div>
+        </form>
+      ) : (
+        <form onSubmit={forgotPasswordMethods.handleSubmit(onForgotPassword)} className="panel panel-dark">
+          <div className="col-6 vstack gap-2">
+            <h5>Forgot Password</h5>
 
-        <button className="btn btn-primary" type="submit">Forgot Password</button>
-      </div>
-    </form>
+            <div className="form-floating">
+              <input
+                id="email"
+                type="email"
+                className={classNames(
+                  'form-control',
+                  {
+                    'is-invalid': forgotPasswordMethods.formState.errors.email,
+                    'is-valid': !forgotPasswordMethods.formState.errors.email && forgotPasswordMethods.formState.dirtyFields.email,
+                  }
+                )}
+                {...forgotPasswordMethods.register('email')}
+              />
+              <label htmlFor="email">Email</label>
+              <div className="invalid-feedback">
+                {forgotPasswordMethods.formState.errors.email?.message}
+              </div>
+            </div>
+
+            <button className="btn btn-primary" type="submit">Forgot Password</button>
+          </div>
+        </form>
+      )}
+    </section>
   )
 }
 

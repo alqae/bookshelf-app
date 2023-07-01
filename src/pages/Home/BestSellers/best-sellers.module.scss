@@ -1,0 +1,5 @@
+@import "@/styles/init";
+
+.bs {
+  background-color: map-get($theme-colors, tertiary);
+}

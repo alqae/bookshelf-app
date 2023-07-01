@@ -8,7 +8,7 @@
 
 // Fonts
 $font-family-primary: 'Clash Display', sans-serif;
-// $font-family-secondary: 'Lato', sans-serif;
+$font-family-secondary: 'Literata', serif;
 $font-size-base: 1.25rem; // 20px
 $line-height-base: 1.8; // 36px
 
@@ -46,28 +46,28 @@ $fonts: (
     ),
     sm: (
       family: $font-family-primary,
+      font-size-mobile: 32px,
+      font-size-desktop: 32px,
+      font-weight: 500,
+      letter-spacing: 0.08px,
+      line-height-mobile: 1.25,
+      line-height-desktop: 1.25,
+      text-transform: uppercase,
+    ),
+    xs: (
+      family: $font-family-primary,
       font-size-mobile: 24px,
       font-size-desktop: 24px,
       font-weight: 400,
       letter-spacing: normal,
       line-height-mobile: 1.16,
       line-height-desktop: 1.16,
-      text-transform: false,
-    ),
-    xs: (
-      family: $font-family-primary,
-      font-size-mobile: 18px,
-      font-size-desktop: 18px,
-      font-weight: 700,
-      letter-spacing: normal,
-      line-height-mobile: 1.7,
-      line-height-desktop: 1.7,
-      text-transform: false,
+      text-transform: uppercase,
     ),
   ),
   body: (
     lg: (
-      family: $font-family-primary,
+      family: $font-family-secondary,
       font-size-mobile: 20px,
       font-size-desktop: 20px,
       font-weight: 400,
@@ -77,17 +77,17 @@ $fonts: (
       text-transform: false,
     ),
     md: (
-      family: $font-family-primary,
+      family: $font-family-secondary,
       font-size-mobile: 16px,
       font-size-desktop: 16px,
-      font-weight: 400,
+      font-weight: 300,
       letter-spacing: normal,
       line-height-mobile: 1.5,
       line-height-desktop: 1.5,
       text-transform: false,
     ),
     sm: (
-      family: $font-family-primary,
+      family: $font-family-secondary,
       font-size-mobile: 14px,
       font-size-desktop: 14px,
       font-weight: 400,
@@ -100,12 +100,12 @@ $fonts: (
   extra: (
     link: (
       family: $font-family-primary,
-      font-size-mobile: 12px,
-      font-size-desktop: 12px,
+      font-size-mobile: 16px,
+      font-size-desktop: 16px,
       font-weight: 400,
       letter-spacing: normal,
-      line-height-mobile: 0.75,
-      line-height-desktop: 0.75,
+      line-height-mobile: 1.5,
+      line-height-desktop: 1.5,
       text-transform: false,
     ),
     menu: (
